@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        canvas {
+            border: 2px solid #999;
+            margin-top: 20px;
+            cursor: crosshair;
+            background-color: white;
+            width: 80%;
+            max-width: 800px;
+            height: auto;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        #penBtn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #eraserBtn {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #clearBtn {
+            background-color: #607d8b;
+            color: white;
+        }
+
+        .button-container {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="drawingCanvas"></canvas>
+    
+    <div class="button-container">
+        <button id="penBtn" onclick="setTool('pen')">Pen</button>
+        <button id="eraserBtn" onclick="setTool('eraser')">Eraser</button>
+        <button id="clearBtn" onclick="clearCanvas()">Clear</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const context = canvas.getContext('2d');
+        let isDrawing = false;
+        let currentTool = 'pen'; // Default tool is pen
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+
+            const { offsetX, offsetY } = e;
+            context.lineWidth = 5;
+            context.lineCap = 'round';
+
+            if (currentTool === 'pen') {
+                context.strokeStyle = '#000';
+            } else if (currentTool === 'eraser') {
+                context.strokeStyle = '#fff';
+            }
+
+            context.lineTo(offsetX, offsetY);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(offsetX, offsetY);
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            context.beginPath();
+        }
+
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function setTool(tool) {
+            currentTool = tool;
+            document.getElementById('penBtn').style.backgroundColor = tool === 'pen' ? '#4CAF50' : '';
+            document.getElementById('eraserBtn').style.backgroundColor = tool === 'eraser' ? '#f44336' : '';
+        }
+    </script>
+</body>
+</html>

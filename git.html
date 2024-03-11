@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing Tool</title>
+    <style>
+        h1{
+            font-family:cursive;
+            color: aqua;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color:pink;
+            background-image: url(imagess.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #drawingCanvas {
+            border: 2px solid black;
+            margin-top: 20px;
+            cursor: crosshair;
+            background-color: white;
+        }
+        .box{
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color:white;
+            color: black;
+            border:2px solid black;
+            border-radius: 50px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <h1><marquee>Drawing Tool</marquee></h1>
+    <canvas id="drawingCanvas" width="500" height="600"></canvas>
+    <button class="box" onclick="setTool('pen')">Pen</button>
+    <button class="box" onclick="setTool('eraser')">Eraser</button>
+    <button class="box" onclick="clearCanvas()">Clear</button>
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const context = canvas.getContext('2d');
+        let isDrawing = false;
+        let currentTool = 'pen'; // Added default tool
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const { offsetX, offsetY } = e;
+            context.lineWidth = 5;
+            context.lineCap = 'round';
+            if (currentTool === 'pen') {
+                context.strokeStyle = '#000';
+            } else if (currentTool === 'eraser') {
+                context.strokeStyle = '#fff';
+            }
+            context.lineTo(offsetX, offsetY);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(offsetX, offsetY);
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+            context.beginPath();
+        }
+
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function setTool(tool) {
+            currentTool = tool;
+        }
+
+        // Git Commands
+        // Run these commands in your terminal to initialize and push to GitHub:
+
+        // Initialize a Git repository
+        // git init
+
+        // Add all files to the staging area
+        // git add .
+
+        // Commit changes with a commit message
+        // git commit -m "Initial commit"
+
+        // Create a new GitHub repository and copy the repository URL
+
+        // Add the remote repository URL
+        // git remote add origin <repository_url>
+
+        // Push the changes to GitHub
+        // git push -u origin master
+    </script>
+</body>
+</html>

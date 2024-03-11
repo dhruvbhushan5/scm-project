@@ -1,0 +1,128 @@
+<head>
+    <title>Drawing Tool</title>
+    <style>
+        h1{
+            font-family:cursive;
+            color: aqua;
+     }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color:pink;
+            background-image: url(imagess.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #drawingCanvas {
+            border: 2px solid black;
+            margin-top: 20px;
+            cursor: crosshair;
+            background-color: white;
+        }
+        .box{
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color:white;
+            color: black;
+            border:2px solid black;
+            border-radius: 50px;
+            outline: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1><marquee>Drawing Tool</marquee></h1>
+    <canvas id="drawingCanvas" width="500" height="600"></canvas>
+    <button class="box"onclick="setTool('pen')">Pen</button>
+    <button class="box"onclick="setTool('eraser')">Eraser</button>
+    <button class="box"onclick="clearCanvas('clear')">Clear</button>
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const context = canvas.getContext('2d');
+        let isDrawing = false;
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+        function startDrawing(e) {
+            isDrawing = true;
+            draw(e);}
+        function draw(e) {
+            if (!isDrawing) return;
+            const { offsetX, offsetY } = e;
+            context.lineWidth = 5;
+            context.lineCap = 'round';
+            if (currentTool === 'pen') {
+                context.strokeStyle = '#000';
+            } else if (currentTool === 'eraser') {
+                context.strokeStyle = '#fff';}
+            context.lineTo(offsetX, offsetY);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(offsetX, offsetY);}
+        function stopDrawing() {
+            isDrawing = false;
+            context.beginPath();}
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);}
+        function setTool(tool) {
+            currentTool = tool;}
+    </script>
+</body>
+</html>
+<!-- 
+Sure, let's break down the HTML and JavaScript code in simple terms:
+
+HTML Explanation:
+<!DOCTYPE html>: This is a declaration that tells the browser to expect HTML5.
+
+<html lang="en">: This is the opening tag for the HTML document, and it indicates that the language used is English.
+
+<head>: This section contains meta-information about the document, such as the character set, viewport settings, and the title of the page.
+
+<meta charset="UTF-8">: Sets the character encoding to UTF-8, which is a standard for encoding text.
+<meta name="viewport" content="width=device-width, initial-scale=1.0">: Configures the viewport settings for better responsiveness on various devices.
+<title>Drawing Tool</title>: Sets the title of the webpage to "Drawing Tool."
+<style>: This section contains CSS (Cascading Style Sheets) code to style the webpage.
+
+h1: Styles the heading (<h1>) with cursive font and aqua color.
+body: Styles the body of the document with a pink background, a background image, and some other properties.
+#drawingCanvas: Styles the drawing canvas with a black border, some margin, and a crosshair cursor.
+.box: Styles buttons with a white background, black border, and rounded corners.
+Body Section:
+<h1><marquee>Drawing Tool</marquee></h1>: Displays a heading with a scrolling effect ("marquee") saying "Drawing Tool."
+
+<canvas id="drawingCanvas" width="500" height="600"></canvas>: Creates a canvas with an id "drawingCanvas" and sets its width and height.
+
+Buttons:
+
+Pen Button (<button class="box" onclick="setTool('pen')">Pen</button>): Creates a button labeled "Pen" that, when clicked, sets the drawing tool to a pen.
+
+Eraser Button (<button class="box" onclick="setTool('eraser')">Eraser</button>): Creates a button labeled "Eraser" that, when clicked, sets the drawing tool to an eraser.
+
+Clear Button (<button class="box" onclick="clearCanvas('clear')">Clear</button>): Creates a button labeled "Clear" that, when clicked, clears the canvas.
+
+JavaScript Explanation:
+Script Section:
+
+const canvas = document.getElementById('drawingCanvas');: Gets the reference to the canvas element with the id "drawingCanvas."
+
+const context = canvas.getContext('2d');: Gets the 2D rendering context of the canvas, which is needed for drawing on it.
+
+Drawing Functions:
+
+startDrawing, draw, stopDrawing: These functions handle the drawing process when the user interacts with the canvas.
+clearCanvas: Clears the entire canvas.
+
+setTool: Sets the current drawing tool based on the button clicked (pen or eraser).
+
+This code essentially creates a simple drawing tool webpage with buttons to switch between a pen and an eraser, as well as a button to clear the canvas. Users can draw on the canvas using the selected tool.
+
+
+
+
+
+ -->

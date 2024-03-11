@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-image: url(img.jpeg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .left {
+
+        position: absolute;
+        margin-top: 18px;
+        display: inline-block;
+        margin-left: 20px;
+    }
+    .left img {
+        width: 100px;
+        filter: invert();
+    }
+    .mid {
+        position: absolute;
+        display: inline-block;
+        margin-left: 450px;
+        margin-top: 18px;
+    }
+    .navbar {
+        display: inline;
+        text-align: center;
+    }
+    .navbar li {
+        display: inline;
+        padding: 10px;
+    }
+    .navbar li a {
+        text-decoration: none;
+        font-size: 20px;
+        color: black;
+    }
+    .navbar li a:hover {
+        background-color: hotpink;
+        cursor: pointer;
+        color: black;
+    }
+    .right {
+
+        position: absolute;
+        display: inline-block;
+        right: 20px;
+        margin-top: 18px;
+    }
+    .btn {
+        background-color: bisque;
+        cursor: pointer;
+        padding: 10px 10px;
+        margin: 5px;
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+
+    <!-- left side -->
+    <div class="left">
+        <div>
+            <img src="download (1).jpg" alt="">
+            <div>dhruv fitness</div>
+        </div>
+        <div class="container">
+            <h1>
+                this is the best gym
+            </h1>
+            <form action="noaction.php">
+                <div class="form-group">
+                    <input type="text" name="" placeholder="enter your name">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="" placeholder="enter your age">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="" placeholder="enter your gender">
+                </div>
+                <button class="btn">submit</button>
+
+            </form>
+        </div>
+
+
+    </div>
+    <!-- this is mid side -->
+    <div class="mid">
+        <div>
+            <ul class="navbar">
+                <li><a href="https://www.youtube.com/" target="_blank">Youtube</a></li>
+                <li><a href="https://www.google.com/" target="_blank">Google</a></li>
+                <li><a href="https://www.justdial.com/" target="_blank">fitness location</a></li>
+                <li><a href="#">contact</a></li>
+            </ul>
+
+        </div>
+
+    </div>
+    <!-- /this is right side -->
+    <div class="right">
+        <div>
+            <button class="btn">email us</button>
+            <button class="btn">contact us</button>
+        </div>
+
+    </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>media query</title>
+</head>
+<style>
+    .box {
+        background-color: red;
+        color: black;
+        border: 2px solid pink;
+        text-align: center;
+        font-size: 25px;
+        display: block;
+
+
+    }
+
+    @media only screen and (max-width: 1000px) and (min-width:500px) {
+        #box1 {
+            display: block;
+            background-color: aqua;
+        }
+    }
+
+    @media only screen and (max-width: 800px) and (min-width:600px) {
+        #box2 {
+            display: block;
+            background-color: hotpink;
+
+
+        }
+    }
+    @media only screen and (max-width:800px) and (min-width:600px){
+        #box3{
+            display:block;
+            background-color: blanchedalmond;
+        }
+        
+    }
+</style>
+
+<body>
+    <div class="box" id="box1">ma ek phone hoon</div>
+    <div class="box" id="box2">ma ek tablet hun</div>
+    <div class="box" id="box3">ma ek computer hun</div>
+    <div class="box" id="box4">ma ek laptop hun</div>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Your existing head content -->
+</head>
+<body>
+    <canvas id="drawingCanvas" width="800" height="600"></canvas>
+    
+    <button onclick="setTool('pen')">Pen</button>
+    <button onclick="setTool('eraser')">Eraser</button>
+    <button onclick="clearCanvas()">Clear</button>
+
+    <script>
+        // Your existing JavaScript code
+
+        function saveDrawing() {
+            const imageData = canvas.toDataURL(); // Convert canvas content to a data URL
+            const tool = currentTool;
+            
+            // Send the drawing data to the server
+            fetch('/save_drawing', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ imageData, tool }),
+            });
+        }
+    </script>
+
+    <!-- Add Flask server code below -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const canvas = document.getElementById('drawingCanvas');
+            const context = canvas.getContext('2d');
+            let isDrawing = false;
+            let currentTool = 'pen';
+
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+
+            function startDrawing(e) {
+                isDrawing = true;
+                draw(e);
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+
+                const { offsetX, offsetY } = e;
+                context.lineWidth = 5;
+                context.lineCap = 'round';
+
+                if (currentTool === 'pen') {
+                    context.strokeStyle = '#000';
+                } else if (currentTool === 'eraser') {
+                    context.strokeStyle = '#fff';
+                }
+
+                context.lineTo(offsetX, offsetY);
+                context.stroke();
+                context.beginPath();
+                context.moveTo(offsetX, offsetY);
+            }
+
+            function stopDrawing() {
+                isDrawing = false;
+                context.beginPath();
+            }
+
+            function clearCanvas() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            function setTool(tool) {
+                currentTool = tool;
+            }
+        });
+    </script>
+
+    <!-- Flask server code -->
+    <script>
+        const flaskServerUrl = 'http://127.0.0.1:5000';  // Change this URL based on your Flask server configuration
+
+        function saveDrawing() {
+            const imageData = canvas.toDataURL();
+            const tool = currentTool;
+
+            fetch(`${flaskServerUrl}/save_drawing`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ imageData, tool }),
+            });
+        }
+    </script>
+</body>
+</html>
