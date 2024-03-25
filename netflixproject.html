@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>netflixt</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .main {
+        display: flex;
+        background-image: url(img/rDJegQJaCyGaYysj2g5XWY.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+
+        height: 80vh;
+
+    }
+
+    .main .box {
+        display: flex;
+        position: absolute;
+        top: 0;
+        height: 80vh;
+        width: 100%;
+        opacity: 0.44;
+        background-color: black;
+    }
+
+    /*.netflix {
+        display: flex;
+        position: absolute;
+        height: 24px;
+        color: red;
+        margin-top: 25px;
+        margin-left: 30px;
+        font-family: "Netflix Sans", "Helvetica Neue", "Segoe UI", Roboto, Ubuntu, sans-serif;
+        fill: rgb(229, 9, 20);
+
+    }*/
+
+    .form select {
+        position: absolute;
+        margin-top: 25px;
+        margin-left: 1245px;
+        height: 20px;
+        width: 100px;
+        border-radius: 5px;
+    }
+
+    .button {
+
+        position: absolute;
+        background-color: red;
+        color: white;
+        border-radius: 3px;
+        margin-left: 1350px;
+        text-align: center;
+        width: 65px;
+        margin-top: 25px;
+    }
+
+    .hero {
+        height: 100%;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-left: 300px;
+        color: white;
+
+    }
+</style>
+
+<body>
+    <div class="main">
+        <div class="netflix">
+            <nav st></nav>
+           <span><img src="Project Practice/img/logo.svg" alt=""></span>            
+        </div>
+        <div class="box">
+
+        </div>
+
+
+            <div class="form">
+                <form action="form.php">
+                    <select name="language" id="">
+                        <option value="english">Language</option>
+                        <option value="english">English</option>
+                        <option value="hindi">Hindi</option>
+                    </select>
+                </form>
+            </div>
+            <div class="button">
+                <p>Sign In</p>
+            </div>
+            <div class="hero">
+                Unlimited movies, TV <br>
+                shows and more
+            </div>
+    </div>
+</body>
+
+</html>
